@@ -12,7 +12,7 @@ export async function sendVerificationEmail(
 			from: "onboarding@resend.dev",
 			to: email,
 			subject: "Anonymous-Feedback || Verification Code",
-			react: VerificationEmail({ username, otp: verifyCode }),
+			react: VerificationEmail({ username, otp: verifyCode.substring(0, 6) }),
 		})
 		return { success: true, message: "Verification Email Send Successfully" }
 	} catch (emailError) {
