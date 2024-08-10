@@ -32,7 +32,7 @@ const UserSchema: Schema<User> = new Schema({
 	username: {
 		type: String,
 		required: [true, "Username is required"],
-        trime: true,
+        trim: true,
         unique: true
 	},
 	email: {
@@ -59,12 +59,11 @@ const UserSchema: Schema<User> = new Schema({
     },
     isAcceptingMessages: {
         type: Boolean,
-        required: [true,"Verify Code Expiry is required"],
         default: true,
     },
     messages: [MessageSchema]
 })
 
-const UserModel = (mongoose.models.Users as mongoose.Model<User> || (mongoose.model<User>("User",UserSchema)));
+const UserModel = (mongoose.models.User as mongoose.Model<User> || mongoose.model<User>("User",UserSchema));
 
 export default UserModel;
