@@ -18,7 +18,7 @@ import { useParams } from "next/navigation"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 
-function messagePage() {
+function MessagePage() {
 	const { toast } = useToast()
 	const params = useParams<{ username: string }>()
 	const form = useForm<z.infer<typeof messageSchema>>({
@@ -80,4 +80,4 @@ function messagePage() {
 	)
 }
 
-export default messagePage
+export default MessagePage
