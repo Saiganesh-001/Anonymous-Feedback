@@ -1,6 +1,6 @@
 "use client"
 
-import MessageCard from "@/components/MessageCard"
+import { MessageCard } from "@/components/MessageCard"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { Switch } from "@/components/ui/switch"
@@ -29,6 +29,7 @@ const UserDashboard = () => {
 				message._id !== messageId
 			})
 		)
+		fetchMessages()
 	}
 
 	const { data: session } = useSession()
@@ -66,6 +67,7 @@ const UserDashboard = () => {
 			setIsSwitchLoading(false)
 			try {
 				const response = await axios.get<ApiResponse>("/api/get-messages")
+				console.log(response.data.messages)
 				setMessages(response.data.messages || [])
 				if (refresh) {
 					toast({
@@ -119,20 +121,20 @@ const UserDashboard = () => {
 		}
 	}
 
-  const {username} = session?.user as User
-  const baseUrl = `${window.location.protocol}//${window.location.host}`
-  const profileUrl = `${baseUrl}/u/${username}`
-
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(profileUrl)
-    toast({
-      title: "URL Copied",
-      description: "Profile URL has been copied to clipboard"
-    })
-  }
-
 	if (!session || !session.user) {
 		return <div>Please Login</div>
+	}
+
+	const { username } = session?.user as User
+	const baseUrl = `${window.location.protocol}//${window.location.host}`
+	const profileUrl = `${baseUrl}/u/${username}`
+
+	const copyToClipboard = () => {
+		navigator.clipboard.writeText(profileUrl)
+		toast({
+			title: "URL Copied",
+			description: "Profile URL has been copied to clipboard",
+		})
 	}
 
 	return (

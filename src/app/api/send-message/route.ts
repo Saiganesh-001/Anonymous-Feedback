@@ -6,7 +6,8 @@ export async function POST(request: Request) {
 	await dbConnect()
 
 	const { username, content } = await request.json()
-
+	console.log(username)
+	
 	try {
 		const user = await UserModel.findOne({ username })
 		if (!user) {
@@ -18,7 +19,7 @@ export async function POST(request: Request) {
 				{ status: 404 }
 			)
 		}
-
+		
 		// is user accepting messages ??
 		if (!user.isAcceptingMessages) {
 			return Response.json(
@@ -29,8 +30,9 @@ export async function POST(request: Request) {
 				{ status: 403 }
 			)
 		}
-
+		
 		const newMessage = { content, createdAt: new Date() }
+		console.log(newMessage)
 		user.messages.push(newMessage as Message)
 		await user.save()
 
