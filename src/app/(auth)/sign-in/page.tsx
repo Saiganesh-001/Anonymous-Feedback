@@ -92,6 +92,7 @@ export default function SignInForm() {
               )}
             />
             <Button className='w-full' type="submit">Sign In</Button>
+            <Button className='w-full' onClick={() => onSubmit({identifier: "GuestUser", password: "saiganesh"})}>Login as Guest</Button>
           </form>
         </Form>
         <div className="text-center mt-4">

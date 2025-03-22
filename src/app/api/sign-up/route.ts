@@ -33,6 +33,7 @@ export async function POST(request: Request) {
 					{
 						success: false,
 						message: "User already exists with this email",
+						emailExists: true
 					},
 					{ status: 400 }
 				)
@@ -68,6 +69,7 @@ export async function POST(request: Request) {
 			username,
 			verifyCode
 		)
+		console.log(emailResponse)
 		if (!emailResponse.success) {
 			return Response.json(
 				{
